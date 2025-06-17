@@ -15,10 +15,13 @@ git clone https://github.com/sera-ina/DualShock-uinput.git
 ```
 
 ## Requirements
+### packages
 - python3
 - python3-dev
+### pip
 - python_uinput
 - evdev
+### system
 - bluetoothctl
   - if desired to be able to disconnect the controller via (PS + Start) combination
 
