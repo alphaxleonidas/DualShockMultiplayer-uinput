@@ -16,12 +16,9 @@ git clone https://github.com/sera-ina/DualShock-uinput.git
 
 ## Requirements
 - python3
-  - tested with Python 3.13.3
 - python3-dev
-- python_uinput 1.0.1
-- evdev 1.9.2
-- gcc
-  - or build-essentials (if on debian/ubuntu)
+- python_uinput
+- evdev
 - bluetoothctl
   - if desired to be able to disconnect the controller via (PS + Start) combination
 
