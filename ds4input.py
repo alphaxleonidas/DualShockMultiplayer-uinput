@@ -1,34 +1,23 @@
 import evdev
 import uinput
 import subprocess
+import re
+import config #config file
 from evdev import InputDevice, categorize, ecodes
-
-DEBUG = False
-
-# Deadzone constants and center value
-CENTER = 128
-DEADZONE_L = 10  # Left stick deadzone
-DEADZONE_R = 10  # Right stick deadzone
-
-# Bluetooth MAC addresses to disconnect
-BT_MACS = [
-    "84:17:66:82:57:F3",   # DS4 MAC - replace with yours
-    "D0:BC:C1:7F:32:BD",   # DualSense MAC - replace with yours
-]
 
 # Find DS4 or DualSense controller device
 def find_controller():
     devices = [InputDevice(path) for path in evdev.list_devices()]
     for device in devices:
-        if DEBUG:
+        if config.DEBUG:
             print(f"Detected: {device.name}")
         if ("Wireless Controller" in device.name or
             "DualSense Wireless Controller" in device.name or
-            "Xbox One S Controller" in device.name):
+            "Sony Interactive Entertainment DualSense Wireless Controller" in device.name):
             return device
     raise RuntimeError("Controller not found")
 
-# Define virtual Xbox 360 controller events
+# Define virtual controller events
 events = (
     uinput.ABS_X + (0, 255, 0, 0),
     uinput.ABS_Y + (0, 255, 0, 0),
@@ -103,26 +92,57 @@ hat_state = {
 button_state = {'ps': False, 'start': False}
 last_values = {}
 
-def check_disconnect_combo(code, val, state):
+def check_disconnect_combo(code, val, state, switch):
     if code == 'BTN_MODE':  # PS button
         state['ps'] = (val == 1)
     elif code == 'BTN_START':
         state['start'] = (val == 1)
     return state['ps'] and state['start']
 
-def disconnect_bluetooth(mac_addresses):
-    for mac in mac_addresses:
-        print(f"Disconnecting Bluetooth device {mac} ...")
-        try:
-            subprocess.run(["bluetoothctl", "disconnect", mac], check=True)
-            print(f"Disconnected {mac} successfully.")
-        except subprocess.CalledProcessError:
-            print(f"Failed to disconnect device {mac}.")
-
 device = find_controller()
 print(f"Using controller device: {device.name}")
 
-ui = uinput.Device(events, name="Virtual Xinput Controller")
+#####
+def get_mac_by_name(target_name=device.name):
+    try:
+        # Run bluetoothctl to get list of paired or found devices
+        result = subprocess.run(
+            ['bluetoothctl', 'devices'],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            universal_newlines=True
+        )
+
+        # Each line will be like: Device XX:XX:XX:XX:XX:XX Wireless Controller
+        for line in result.stdout.strip().split('\n'):
+            match = re.match(r'Device\s+([0-9A-F:]{17})\s+(.+)', line)
+            if match:
+                mac, name = match.groups()
+                if name == target_name:
+                    return mac
+    except Exception as e:
+        print(f"Error: {e}")
+
+    return None
+
+mac_address = get_mac_by_name()
+if mac_address:
+    print(f"MAC Address: {mac_address}")
+else:
+    print("Wireless Controller not found.")
+#####
+
+def disconnect_bluetooth(mac_address):
+        print(f"Disconnecting Bluetooth device {device.name} ...")
+        try:
+            subprocess.run(["bluetoothctl", "disconnect", mac_address], check=True)
+            print(f"Disconnected {device.name} successfully.")
+        except subprocess.CalledProcessError:
+            print(f"Failed to disconnect device {device.name}.")
+
+#####
+
+ui = uinput.Device(events, name=config.controllerName)
 
 # Main event loop
 for event in device.read_loop():
@@ -133,15 +153,15 @@ for event in device.read_loop():
         if code in abs_map:
             # Deadzone filtering
             if code in (ecodes.ABS_X, ecodes.ABS_Y):  # Left stick
-                centered_val = val - CENTER
-                if abs(centered_val) < DEADZONE_L:
-                    filtered_val = CENTER
+                centered_val = val - config.CENTER
+                if abs(centered_val) < config.DEADZONE_L:
+                    filtered_val = config.CENTER
                 else:
                     filtered_val = val
             elif code in (ecodes.ABS_RX, ecodes.ABS_RY):  # Right stick
-                centered_val = val - CENTER
-                if abs(centered_val) < DEADZONE_R:
-                    filtered_val = CENTER
+                centered_val = val - config.CENTER
+                if abs(centered_val) < config.DEADZONE_R:
+                    filtered_val = config.CENTER
                 else:
                     filtered_val = val
             else:
@@ -157,7 +177,7 @@ for event in device.read_loop():
             elif code == ecodes.ABS_HAT0Y:
                 hat_state[ecodes.ABS_HAT0Y] = val
         else:
-            if DEBUG:
+            if config.DEBUG:
                 print(f"[ABS] Unhandled: {code} = {val}")
 
         ui.syn()
@@ -170,12 +190,13 @@ for event in device.read_loop():
         if isinstance(code, (list, tuple)):
             code = code[0]
 
-        if check_disconnect_combo(code, val, button_state):
-            print("PS + Start combo detected! Disconnecting Bluetooth devices...")
-            disconnect_bluetooth(BT_MACS)
-            break
+        if check_disconnect_combo(code, val, button_state, config.BT_SWITCH):
+            if config.BT_SWITCH:
+                print("PS + Start combo detected! Disconnecting Bluetooth devices...")
+                disconnect_bluetooth(mac_address)
+                break
 
-        if DEBUG:
+        if config.DEBUG:
             print(f"[DEBUG] KEY: {code} = {val}")
 
         if code in keymap:
@@ -183,5 +204,5 @@ for event in device.read_loop():
                 ui.emit(keymap[code], val)
                 last_values[code] = val
         else:
-            if DEBUG:
+            if config.DEBUG:
                 print(f"[KEY] Unmapped: {code} = {val}")
