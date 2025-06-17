@@ -4,7 +4,7 @@ The script is as-is. I personally have no experience in python and the script wa
 
 # Description
 
-This script wraps a PS4 or PS5 controller and creates a uinput controller (xinput controller) that should make it work with any game that also supports gamepad in general or xbox controllers. Works systemwide without the need for steam input, lutris or bottles. Works wired and via Bluetooth.
+I tried various of the other tools around that do this but none of them worked properly for me for some games in Lutris or Bottles, so I used ChatGPT to make this script. This script takes the input from the PS controller and creates a uinput controller (xinput controller) that should make it work with any game that also supports gamepad in general or xbox controllers. Works wired and via Bluetooth.
 
 **It only works for one active controller!**
 
