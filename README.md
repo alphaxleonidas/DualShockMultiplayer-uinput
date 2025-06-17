@@ -45,3 +45,7 @@ In the config.py file you can change the deadzone of each stick, the name of the
 ~/.venv/bin/python ds4input.py
 ```
 as the script looks for the controller directly on start else the script will just stop with an error.
+
+# Additional Infos
+- No vibration / force feedback
+- The PS button is a separate button that you can map, for example in AntiMicroX
