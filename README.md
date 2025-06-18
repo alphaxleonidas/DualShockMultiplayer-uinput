@@ -18,6 +18,7 @@ git clone https://github.com/sera-ina/DualShock-uinput.git
 ### packages
 - python3
 - python3-dev
+- python3-venv
 ### pip
 - python_uinput
 - evdev
