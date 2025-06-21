@@ -4,7 +4,7 @@ The script is as-is and was in general just for personal use, I set this git up 
 
 # Description
 
-I wanted a tool that works systemwide for any game so I don't always have to rely on SteamInput/Bottles/Lutris. Works wired and via Bluetooth.
+I wanted a tool that works systemwide for any game so I don't always have to rely on SteamInput/Bottles/Lutris. Works wired and via Bluetooth. Works for PS4 and PS5 controller.
 
 It in general reads the raw input from the PS controllers and sends it as a virtual controller in uinput (xinput), which I needed especially in older games which don't support DirectInput at all.
 
