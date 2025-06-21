@@ -1,10 +1,12 @@
 # Disclaimer
 
-The script is as-is. I personally have no experience in python and the script was made by 99% with ChatGPT (with a few hours of troubleshooting and feeding it with outputs). So expect a spaghetti code... sorry.
+The script is as-is and was in general just for personal use, I set this git up so others who stumble upon might find it useful too. I personally have no experience in python and the script was made by 99% with ChatGPT (with a few hours of troubleshooting and feeding it with outputs). So expect a spaghetti code... sorry.
 
 # Description
 
-I tried various of the other tools around that do this but none of them worked properly for me for some games in Lutris or Bottles, so I used ChatGPT to make this script. This script takes the input from the PS controller and creates a uinput controller (xinput controller) that should make it work with any game that also supports gamepad in general or xbox controllers. Works wired and via Bluetooth.
+I wanted a tool that works systemwide for any game so I don't always have to rely on SteamInput/Bottles/Lutris. Works wired and via Bluetooth.
+
+It in general reads the raw input from the PS controllers and sends it as a virtual controller in uinput (xinput), which I needed especially in older games which don't support DirectInput at all.
 
 **It only works for one active controller!**
 
