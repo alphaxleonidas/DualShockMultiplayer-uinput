@@ -12,9 +12,13 @@ def find_controller():
         if config.DEBUG:
             print(f"Detected: {device.name}")
         if ("Wireless Controller" in device.name or
-            "DualSense Wireless Controller" in device.name or
-            "Sony Interactive Entertainment DualSense Wireless Controller" in device.name):
-            return device
+            "DualSense Wireless Controller" in device.name):
+            caps = device.capabilities()
+            if ecodes.EV_ABS in caps and ecodes.EV_KEY in caps:
+                # Might want to check for some specific buttons
+                keys = caps.get(ecodes.EV_KEY, [])
+                if ecodes.BTN_SOUTH in keys:  # 'X' on PlayStation
+                    return device
     raise RuntimeError("Controller not found")
 
 # Define virtual controller events
