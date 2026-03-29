@@ -104,7 +104,7 @@ Replace ```$user``` with your username, so the paths becomes correct. E.g. ```Ex
 
 Now make this desktop entry an executeable:
 ```
-chmod+x ~/.local/share/applications/ds4input.desktop
+chmod +x ~/.local/share/applications/ds4input.desktop
 ```
 Now logout and relogin into a new session. You will see ```ds4input``` in the appmenu.
 Now connect your DualShock or DualSense and run the ds4input from the appmenu.
