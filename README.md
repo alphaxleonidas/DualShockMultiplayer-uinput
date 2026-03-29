@@ -13,6 +13,7 @@ It in general reads the raw input from the PS controllers and sends it as a virt
 # Installing
 Download the files manually or clone
 ```
+cd ~
 git clone https://github.com/sera-ina/DualShock-uinput.git
 ```
 
