@@ -27,6 +27,13 @@ git clone https://github.com/sera-ina/DualShock-uinput.git
 ### system
 - bluetoothctl
   - if desired to be able to disconnect the controller via (PS + Start) combination
+### dependency installation
+- for an ubuntu based distro, use:
+```
+sudo apt update
+sudo apt install python3-dev python3-venv
+```
+note: rest of the dependencies are not needed in my testing. might have to use bluez instead of bluetoothctl for ubuntu based distros.
 
 ## Preparation
 
@@ -40,7 +47,7 @@ Update pip
 ```
 When it is done, install the dependencies manually or with the requirements.txt file
 ```
-~/.venv/bin/pip install -r requirements.txt
+~/.venv/bin/pip install -r ~/DualShock-uinput/requirements.txt
 ```
 Create udev rules file
 ```
@@ -69,7 +76,7 @@ In the config.py file you can change the deadzone of each stick, the name of the
 
 **Connect you PS4/PS5 controller first via USB or Bluetooth**, then run the script
 ```
-~/.venv/bin/python ds4input.py
+~/.venv/bin/python ~/DualShock-uinput/ds4input.py
 ```
 as the script looks for the controller directly on start else the script will just stop with an error.
 
