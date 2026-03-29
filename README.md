@@ -1,6 +1,6 @@
 # Disclaimer
 
-The original repo was made by ChatGPT but this fork has been modified using Copilot. Sorry it's purely AI generated. 
+The original repo was made by ChatGPT but this fork has been modified using Copilot. Sorry if it's messy. 
 
 This fork has been modified for multicontroller support.
 
@@ -11,6 +11,7 @@ I wanted a tool that works systemwide for any game so I don't always have to rel
 It in general reads the raw input from the PS controllers and sends it as a virtual controller in uinput (xinput), which I needed especially in older games which don't support DirectInput at all.
 
 ~~**It only works for one active controller!**~~
+
 **It works with multiple active controllers. Tested on two. **
 
 
@@ -20,6 +21,7 @@ It in general reads the raw input from the PS controllers and sends it as a virt
 - python3
 - python3-dev
 - python3-venv
+- python3-pyudev (for hotplug support)
 ### pip
 - python_uinput
 - evdev
@@ -30,7 +32,7 @@ It in general reads the raw input from the PS controllers and sends it as a virt
 - for an ubuntu based distro, use:
 ```
 sudo apt update
-sudo apt install python3-dev python3-venv
+sudo apt install python3-dev python3-venv python3-pyudev
 ```
 note: rest of the dependencies are not needed in my testing. might have to use ```bluez``` instead of ```bluetoothctl``` for ubuntu based distros.
 
@@ -80,7 +82,7 @@ sudo udevadm trigger
 **Steps:**
 - **Connect you PS4/PS5 controller first via USB or Bluetooth**, then run the script
 ```
-~/.venv/bin/python ~/DualShockMultiplayer-uinput/ds4input_multiplayer.py
+~/.venv/bin/python ~/DualShockMultiplayer-uinput/ds4input_multiplayerv2.py
 ```
 as the script looks for the controller directly on start else the script will just stop with an error.
 
@@ -88,15 +90,15 @@ as the script looks for the controller directly on start else the script will ju
 
 Instead of running the command, you can create a script which will appear in the App Menu.
 ```
-nano ~/.local/share/applications/ds4input_multiplayer.desktop
+nano ~/.local/share/applications/ds4input_multiplayerv2.desktop
 ```
 Add this to the file: 
 ```
 [Desktop Entry]
 Version=1.0
 Name=DualShock Multiplayer uinput
-Comment=Run DualShock DS4 input script
-Exec=/home/$user/.venv/bin/python /home/$user/DualShockMultiplayer-uinput/ds4input_multiplayer.py
+Comment=Run DualShock DS4 input script Hot plugging
+Exec=/home/$user/.venv/bin/python /home/$user/DualShockMultiplayer-uinput/ds4input_multiplayerv2.py
 Type=Application
 Icon=input-gaming
 Terminal=false
@@ -118,4 +120,4 @@ Now connect your DualShock or DualSense and run the ```DualShock uinput``` from 
 - In the config.py file you can change the deadzone of each stick, the name of the controller and if you want to be able to use the (PS + Start) combo to disconnect the controller.
 
 # Issues 
-- If the controller is disconnected while the script is running, reconnecting will not make it work. You will have to restart the script. So expect some degree of memory leak.  
+- ~~If the controller is disconnected while the script is running, reconnecting will not make it work. You will have to restart the script. So expect some degree of memory leak.~~  Fixed with ds4input_multiplayerv2.py . 
