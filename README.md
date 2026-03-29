@@ -109,7 +109,7 @@ Replace ```$user``` with your username, so the paths becomes correct. E.g. ```Ex
 
 Now make this desktop entry an executeable:
 ```
-chmod +x ~/.local/share/applications/ds4input_multiplayer.desktop
+chmod +x ~/.local/share/applications/ds4input_multiplayerv2.desktop
 ```
 Now logout and relogin into a new session. You will see ```DualShock uinput``` in the appmenu.
 Now connect your DualShock or DualSense and run the ```DualShock uinput``` from the appmenu.
