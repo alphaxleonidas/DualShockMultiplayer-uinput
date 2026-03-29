@@ -37,7 +37,7 @@ note: rest of the dependencies are not needed in my testing. might have to use `
 Download the files manually or clone repo
 ```
 cd ~
-git clone https://github.com/sera-ina/DualShock-uinput.git
+git clone https://github.com/alphaxleonidas/DualShockMulti-uinput.git
 ```
 
 Once you installed python on your system, create a virtual enviroment (for example ".venv" in your home folder)
@@ -50,7 +50,7 @@ Update pip
 ```
 When it is done, install the dependencies manually or with the requirements.txt file
 ```
-~/.venv/bin/pip install -r ~/DualShock-uinput/requirements.txt
+~/.venv/bin/pip install -r ~/DualShockMulti-uinput/requirements.txt
 ```
 Create udev rules file
 ```
@@ -79,7 +79,7 @@ sudo udevadm trigger
 **Steps:**
 - **Connect you PS4/PS5 controller first via USB or Bluetooth**, then run the script
 ```
-~/.venv/bin/python ~/DualShock-uinput/ds4input.py
+~/.venv/bin/python ~/DualShockMulti-uinput/ds4multiinput.py
 ```
 as the script looks for the controller directly on start else the script will just stop with an error.
 
@@ -87,15 +87,15 @@ as the script looks for the controller directly on start else the script will ju
 
 Instead of running the command, you can create a script which will appear in the App Menu.
 ```
-nano ~/.local/share/applications/ds4input.desktop
+nano ~/.local/share/applications/ds4multiinput.desktop
 ```
 Add this to the file: 
 ```
 [Desktop Entry]
 Version=1.0
-Name=DualShock uinput
+Name=DualShock Multi uinput
 Comment=Run DualShock DS4 input script
-Exec=/home/$user/.venv/bin/python /home/$user/DualShock-uinput/ds4input.py
+Exec=/home/$user/.venv/bin/python /home/$user/DualShock-uinput/ds4multiinput.py
 Type=Application
 Icon=input-gaming
 Terminal=false
@@ -106,7 +106,7 @@ Replace ```$user``` with your username, so the paths becomes correct. E.g. ```Ex
 
 Now make this desktop entry an executeable:
 ```
-chmod +x ~/.local/share/applications/ds4input.desktop
+chmod +x ~/.local/share/applications/ds4multiinput.desktop
 ```
 Now logout and relogin into a new session. You will see ```DualShock uinput``` in the appmenu.
 Now connect your DualShock or DualSense and run the ```DualShock uinput``` from the appmenu.
