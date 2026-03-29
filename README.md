@@ -117,6 +117,9 @@ chmod +x ~/.local/share/applications/ds4input_multiplayerv2.desktop
 Now logout and relogin into a new session. You will see ```DualShock Multiplayer uinput``` in the appmenu.
 Now connect your DualShock or DualSense and run the ```DualShock Multiplayer uinput``` from the appmenu.
 
+# Disconnect
+To disconnect from bluetooth, use (PS + Start) 
+
 # Additional Infos
 - No vibration / force feedback
 - The PS button is a separate button that you can map, for example in AntiMicroX
