@@ -1,5 +1,7 @@
 # Disclaimer
 
+Forked from [DualShock-uinput](https://github.com/sera-ina/DualShock-uinput)
+
 The original repo was made by ChatGPT but this fork has been modified using Copilot. Sorry if it's messy. 
 
 This fork has been modified for multicontroller support and hotplugging. 
