@@ -12,7 +12,7 @@ It in general reads the raw input from the PS controllers and sends it as a virt
 
 ~~**It only works for one active controller!**~~
 
-**It works with multiple active controllers. Tested on two. **
+**It works with multiple active controllers. Tested on two.**
 
 
 
