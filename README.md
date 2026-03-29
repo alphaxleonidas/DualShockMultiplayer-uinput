@@ -1,8 +1,8 @@
 # Disclaimer
 
-The script is as-is and was in general just for personal use, I set this git up so others who stumble upon might find it useful too. I personally have no experience in python and the script was made by 99% with ChatGPT (with a few hours of troubleshooting and feeding it with outputs). So expect a spaghetti code... sorry.
+The original repo was made by ChatGPT but this fork has been modified using Copilot. Sorry it's purely AI generated. 
 
-This fork has the same contents but the readme section has been streamlined.
+This fork has been modified for multicontroller support.
 
 # Description
 
@@ -10,7 +10,8 @@ I wanted a tool that works systemwide for any game so I don't always have to rel
 
 It in general reads the raw input from the PS controllers and sends it as a virtual controller in uinput (xinput), which I needed especially in older games which don't support DirectInput at all.
 
-**It only works for one active controller!**
+~~**It only works for one active controller!**~~
+**It works with multiple active controllers. Tested on two. **
 
 
 
@@ -115,3 +116,6 @@ Now connect your DualShock or DualSense and run the ```DualShock uinput``` from 
 - No vibration / force feedback
 - The PS button is a separate button that you can map, for example in AntiMicroX
 - In the config.py file you can change the deadzone of each stick, the name of the controller and if you want to be able to use the (PS + Start) combo to disconnect the controller.
+
+# Issues 
+- If the controller is disconnected while the script is running, reconnecting will not make it work. You will have to restart the script. So expect some degree of memory leak.  
