@@ -2,7 +2,7 @@
 
 The original repo was made by ChatGPT but this fork has been modified using Copilot. Sorry if it's messy. 
 
-This fork has been modified for multicontroller support.
+This fork has been modified for multicontroller support and hotplugging. 
 
 # Description
 
@@ -105,19 +105,21 @@ Terminal=false
 Categories=Utility;Game;
 Keywords=ds4;dualshock4;controller;dualsense;sense;
 ```
-Replace ```$user``` with your username, so the paths becomes correct. E.g. ```Exec=/home/randomusername/.venv/bin/python /home/randomusername/DualShockMultiplayer-uinput/ds4input_multiplayer.py```
+Replace ```$user``` with your username, so the paths becomes correct. E.g. 
+```Exec=/home/randomusername/.venv/bin/python /home/randomusername/DualShockMultiplayer-uinput/ds4input_multiplayer.py```
 
 Now make this desktop entry an executeable:
 ```
 chmod +x ~/.local/share/applications/ds4input_multiplayerv2.desktop
 ```
-Now logout and relogin into a new session. You will see ```DualShock uinput``` in the appmenu.
-Now connect your DualShock or DualSense and run the ```DualShock uinput``` from the appmenu.
+Now logout and relogin into a new session. You will see ```DualShock Multiplayer uinput``` in the appmenu.
+Now connect your DualShock or DualSense and run the ```DualShock Multiplayer uinput``` from the appmenu.
 
 # Additional Infos
 - No vibration / force feedback
 - The PS button is a separate button that you can map, for example in AntiMicroX
 - In the config.py file you can change the deadzone of each stick, the name of the controller and if you want to be able to use the (PS + Start) combo to disconnect the controller.
+- ```ds4input_multiplayerv2.py``` is for hotplugging support.
 
 # Issues 
 - ~~If the controller is disconnected while the script is running, reconnecting will not make it work. You will have to restart the script. So expect some degree of memory leak.~~  Fixed with ds4input_multiplayerv2.py . 
