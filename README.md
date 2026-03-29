@@ -84,7 +84,9 @@ as the script looks for the controller directly on start else the script will ju
 # Creating an App Entry
 
 Instead of running the command, you can create a script instead, which will appear in the App Menu.
-```nano ~/.local/share/applications/ds4input.desktop```
+```
+nano ~/.local/share/applications/ds4input.desktop
+```
 Add this to the file: 
 ```
 [Desktop Entry]
