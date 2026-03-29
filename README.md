@@ -73,9 +73,9 @@ sudo udevadm trigger
 ```
 
 # Usage
-In the config.py file you can change the deadzone of each stick, the name of the controller and if you want to be able to use the (PS + Start) combo to disconnect the controller.
 
-**Connect you PS4/PS5 controller first via USB or Bluetooth**, then run the script
+**Steps:**
+- **Connect you PS4/PS5 controller first via USB or Bluetooth**, then run the script
 ```
 ~/.venv/bin/python ~/DualShock-uinput/ds4input.py
 ```
@@ -84,3 +84,4 @@ as the script looks for the controller directly on start else the script will ju
 # Additional Infos
 - No vibration / force feedback
 - The PS button is a separate button that you can map, for example in AntiMicroX
+- In the config.py file you can change the deadzone of each stick, the name of the controller and if you want to be able to use the (PS + Start) combo to disconnect the controller.
