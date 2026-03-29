@@ -81,6 +81,32 @@ sudo udevadm trigger
 ```
 as the script looks for the controller directly on start else the script will just stop with an error.
 
+# Creating an App Entry
+
+Instead of running the command, you can create a script instead, which will appear in the App Menu.
+```nano ~/.local/share/applications/ds4input.desktop```
+Add this to the file: 
+```
+[Desktop Entry]
+Version=1.0
+Name=DualShock uinput
+Comment=Run DualShock DS4 input script
+Exec=/home/$user/.venv/bin/python /home/$user/DualShock-uinput/ds4input.py
+Type=Application
+Icon=input-gaming
+Terminal=false
+Categories=Utility;Game;
+Keywords=ds4;dualshock4;controller;
+```
+Replace ```$user``` with your username, so the paths becomes correct. E.g. Exec=/home/randomusername/.venv/bin/python /home/randomusername/DualShock-uinput/ds4input.py
+
+Now make this desktop entry an executeable:
+```
+chmod+x ~/.local/share/applications/ds4input.desktop
+```
+Now logout and relogin into a new session. You will see ```ds4input``` in the appmenu.
+Now connect your DualShock or DualSense and run the ds4input from the appmenu.
+
 # Additional Infos
 - No vibration / force feedback
 - The PS button is a separate button that you can map, for example in AntiMicroX
