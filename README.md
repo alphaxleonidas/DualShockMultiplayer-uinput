@@ -90,7 +90,7 @@ as the script looks for the controller directly on start else the script will ju
 
 # Creating an App Entry
 
-Instead of running the command, you can create a script which will appear in the App Menu.
+Instead of running the command, you can create a launch script which will appear in the App Menu.
 ```
 nano ~/.local/share/applications/ds4input_multiplayerv2.desktop
 ```
@@ -100,15 +100,16 @@ Add this to the file:
 Version=1.0
 Name=DualShock Multiplayer uinput
 Comment=Run DualShock DS4 input script Hot plugging
-Exec=/home/$user/.venv/bin/python /home/$user/DualShockMultiplayer-uinput/ds4input_multiplayerv2.py
+Exec=/home/<username>/.venv/bin/python /home/<username>/DualShockMultiplayer-uinput/ds4input_multiplayerv2.py
 Type=Application
 Icon=input-gaming
 Terminal=false
 Categories=Utility;Game;
 Keywords=ds4;dualshock4;controller;dualsense;sense;
 ```
-Replace ```$user``` with your username, so the paths becomes correct. E.g. 
-```Exec=/home/randomusername/.venv/bin/python /home/randomusername/DualShockMultiplayer-uinput/ds4input_multiplayer.py```
+Replace ```<username>``` with your username, so the paths becomes correct. E.g. 
+
+```Exec=/home/randomusername/.venv/bin/python /home/randomusername/DualShockMultiplayer-uinput/ds4input_multiplayerv2.py```
 
 Now make this desktop entry an executeable:
 ```
@@ -127,4 +128,5 @@ To disconnect from bluetooth, use (PS + Start)
 - ```ds4input_multiplayerv2.py``` is for hotplugging support.
 
 # Issues 
-- ~~If the controller is disconnected while the script is running, reconnecting will not make it work. You will have to restart the script. So expect some degree of memory leak.~~  Fixed with ds4input_multiplayerv2.py . 
+- ~~If the controller is disconnected while the script is running, reconnecting will not make it work. You will have to restart the script. So expect some degree of memory leak.~~  Fixed with ds4input_multiplayerv2.py .
+- After first connecting, the system automatically registers up+forward input from the controller. Which resolves after moving the Left Analogue Stick.
